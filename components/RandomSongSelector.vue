@@ -141,8 +141,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
   border: 1px solid #eee;
   border-radius: 8px;
