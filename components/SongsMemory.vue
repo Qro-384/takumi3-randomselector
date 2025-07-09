@@ -125,9 +125,7 @@ export default {
 
 .song-title {
   flex-grow: 1; /* 利用可能なスペースを最大限に使う */
-  white-space: nowrap; /* テキストを折り返さない */
-  overflow: hidden; /* はみ出した部分を隠す */
-  text-overflow: ellipsis; /* はみ出した部分を...で表示 */
+
   min-width: 50px; /* 最小幅を確保 */
   margin-right: 10px;
 }
