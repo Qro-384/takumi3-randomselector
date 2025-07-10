@@ -1,21 +1,21 @@
 <template>
-    <div class="song-memory">
+    <div class="song-memory glass-card">
         <p>選曲履歴</p>
         <div class="song-list">
         <ul>
-            <li v-for="song in reversedSongHistory" :key="song.id || `${song.title}-${song.difficulty}`" class="song-item">
+            <li v-for="song in reversedSongHistory" :key="song.id || `${song.title}-${song.difficulty}`" class="song-item glass-card">
               <div class="song-details">
                 <span class="song-title" :title="song.title" :class="difficultyClass(song)">{{ song.title }}</span>
                 <span class="song-difficulty-text">[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</span>
                 <span class="song-level">Lv. {{ song.level.toFixed(1) }}</span>
               </div>
-              <button @click="$emit('update:modelValue', modelValue.filter(s => s.id !== song.id))">削除</button>
+              <button @click="$emit('update:modelValue', modelValue.filter(s => s.id !== song.id))" class="glass-button danger">削除</button>
             </li>
         </ul>
         </div>
     
         <div class="controls">
-        <button @click="clearMemory">リセット</button>
+        <button @click="clearMemory" class="glass-button">全て削除</button>
         </div>
     </div>
 </template>
@@ -59,24 +59,9 @@ export default {
 </script>
 
 <style scoped>
-.difficulty-hard { color: orange; }
-.difficulty-master { color: purple; }
-.difficulty-insanity { color: gray; }
-.difficulty-ravage { color: red; }
-
-
-
 .song-memory {
   margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
   text-align: left;
-}
-
-.difficulty-default {
-  color: grey;
 }
 
 .song-memory p {
@@ -84,8 +69,7 @@ export default {
   margin-bottom: 15px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2c3e50;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 10px;
 }
 
@@ -93,7 +77,7 @@ export default {
   max-height: 250px;
   overflow-y: auto;
   margin-bottom: 15px;
-  padding-right: 5px; /* スクロールバーのスペース */
+  padding-right: 10px;
 }
 
 .song-list ul {
@@ -106,62 +90,36 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
   margin-bottom: 8px;
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  transition: box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-.song-item:hover {
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 10px 15px; /* Reduced padding */
+  background: rgba(255, 255, 255, 0.15); /* Slightly different background for items */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .song-details {
   display: flex;
   align-items: center;
-  flex-grow: 1; /* ボタン以外の残りのスペースを埋める */
-  min-width: 0; /* flexアイテムがコンテナより大きい場合に縮小できるようにする */
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .song-title {
-  flex-grow: 1; /* 利用可能なスペースを最大限に使う */
-
-  min-width: 50px; /* 最小幅を確保 */
+  flex-grow: 1;
+  min-width: 50px;
   margin-right: 10px;
 }
 
-.song-difficulty-text {
-  flex-shrink: 0; /* 縮まないようにする */
+.song-difficulty-text, .song-level {
+  flex-shrink: 0;
+  white-space: nowrap;
   margin-right: 10px;
-  white-space: nowrap;
 }
 
-.song-level {
-  flex-shrink: 0; /* 縮まないようにする */
-  white-space: nowrap;
+.song-item button.danger {
+    background: rgba(244, 67, 54, 0.5);
 }
-
-.song-item button,
-.controls button {
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.song-item button {
-  background-color: #f44336; /* Red */
-  padding: 5px 10px;
-  font-size: 0.85rem;
-  margin-left: 15px;
-  flex-shrink: 0; /* ボタンが縮まないようにする */
-}
-
-.song-item button:hover {
-  background-color: #d32f2f;
+.song-item button.danger:hover {
+    background: rgba(211, 47, 47, 0.7);
 }
 
 .controls {
@@ -169,26 +127,21 @@ export default {
   margin-top: 20px;
 }
 
-.controls button {
-  background-color: #757575; /* Gray */
-  padding: 8px 15px;
-  font-size: 0.9rem;
-}
-
-.controls button:hover {
-  background-color: #616161;
-}
+/* Difficulty Colors */
+.difficulty-hard { color: #ffd54f; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.difficulty-master { color: #ce93d8; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.difficulty-insanity { color: #e0e0e0; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.difficulty-ravage { color: #ff5252; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .song-difficulty-text {
     display: none;
   }
-
   /* On small screens, apply color to the title */
-  .song-title.difficulty-hard { color: orange; }
-  .song-title.difficulty-master { color: purple; }
-  .song-title.difficulty-insanity { color: gray; }
-  .song-title.difficulty-ravage { color: red; }
+  .song-title.difficulty-hard { color: #ffd54f; }
+  .song-title.difficulty-master { color: #ce93d8; }
+  .song-title.difficulty-insanity { color: #e0e0e0; }
+  .song-title.difficulty-ravage { color: #ff5252; }
 }
 </style>

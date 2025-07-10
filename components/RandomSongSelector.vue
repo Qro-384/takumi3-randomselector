@@ -1,8 +1,8 @@
 <template>
-  <div id="random-song-selector">
+  <div id="random-song-selector" class="glass-card">
     <h1 class="title">TAKUMI³ Random Song Sel³ctor</h1>
 
-    <div class="controls">
+    <div class="controls glass-card">
       <h2>選曲条件</h2>
       <SongFilterControls
         v-model:minLevel="minLevel"
@@ -20,14 +20,16 @@
         :max-level="maxLevel"
       />
       
-      <button @click="selectRandomSong">ランダム選曲！</button>
+      <div class="button-container">
+        <button @click="selectRandomSong" class="glass-button glass-button-primary">ランダム選曲！</button>
+      </div>
     </div>
 
     <SongDisplay v-if="currentSong" :song="currentSong" />
 
     <ErrorMessage v-if="errorMessage" :message="errorMessage" />
 
-    <SongsMemory v-if="songsMemory.length > 0" v-model="songsMemory"/>
+    <SongsMemory v-model="songsMemory"/>
   </div>
 </template>
 
@@ -134,48 +136,15 @@ export default {
 </script>
 
 <style scoped>
-#random-song-selector {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-}
-
 .title {
-  color: black;
+  color: white; /* Changed to white to be visible on the new background */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-.controls {
-  margin-bottom: 30px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+.button-container {
+  text-align: center;
+  margin-top: 20px;
 }
 
-button {
-  background-color: #42b983;
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  margin-top: 10px;
-  transition: background-color 0.2s ease;
-}
-
-button:hover {
-  background-color: #36a172;
-}
+/* Keep other specific styles if necessary, but remove general layout styles */
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="blacklist-section">
+  <div class="blacklist-section glass-card">
     <h3>ブラックリスト指定</h3>
     <div class="input-group">
       <label for="search-song">曲を検索して追加:</label>
@@ -106,21 +106,83 @@ export default {
 
 <style scoped>
 .input-group { margin-bottom: 15px; text-align: left; }
-.input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-.input-group input[type="text"] { width: calc(100% - 22px); padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
-.blacklist-section { margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px; }
-.search-results { list-style: none; padding: 0; margin-top: 10px; max-height: 180px; overflow-y: auto; border: 1px solid #ddd; border-radius: 4px; background-color: #fff; text-align: left; }
-.search-results li { padding: 10px 15px; border-bottom: 1px solid #eee; cursor: pointer; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #eee; }
+.input-group input[type="text"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+.input-group input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.blacklist-section { margin-top: 25px; padding-top: 20px; }
+.blacklist-section h3, .current-blacklist h4 { color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05); /* Lighter glass for search results */
+  text-align: left;
+}
+.search-results li {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  color: #fff;
+}
 .search-results li:last-child { border-bottom: none; }
-.search-results li:hover { background-color: #f0f0f0; }
-.search-results li.is-blacklisted { background-color: #ffe6e6; color: #888; cursor: default; }
-.search-results li.is-blacklisted:hover { background-color: #ffe6e6; }
-.blacklisted-indicator { font-size: 0.8em; color: #f00; margin-left: 5px; }
-.no-results { font-style: italic; color: #777; margin-top: 10px; }
-.current-blacklist { margin-top: 20px; text-align: left; border: 1px dashed #ccc; padding: 15px; border-radius: 5px; background-color: #fff; }
-.current-blacklist h4 { margin-top: 0; margin-bottom: 10px; color: #555; }
+.search-results li:hover { background-color: rgba(255, 255, 255, 0.15); }
+.search-results li.is-blacklisted {
+  background-color: rgba(255, 99, 71, 0.2); /* Tomato red for blacklisted */
+  color: #ccc;
+  cursor: default;
+}
+.search-results li.is-blacklisted:hover { background-color: rgba(255, 99, 71, 0.3); }
+.blacklisted-indicator { font-size: 0.8em; color: #ff8a80; margin-left: 5px; }
+.no-results { font-style: italic; color: #aaa; margin-top: 10px; }
+.current-blacklist {
+  margin-top: 20px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08); /* Slightly different glass for current blacklist */
+}
+.current-blacklist h4 { margin-top: 0; margin-bottom: 10px; color: #fff; }
 .current-blacklist ul { list-style: none; padding: 0; }
-.current-blacklist li { background-color: #eef; padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; }
-.current-blacklist li button { background-color: #dc3545; color: white; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer; font-size: 0.85rem; margin-top: 0; }
-.current-blacklist li button:hover { background-color: #c82333; }
+.current-blacklist li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.current-blacklist li button {
+  background-color: rgba(244, 67, 54, 0.5); /* Red for remove button */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0;
+  transition: background-color 0.2s ease;
+}
+.current-blacklist li button:hover {
+  background-color: rgba(211, 47, 47, 0.7);
+}
 </style>

@@ -1,0 +1,60 @@
+/* components/styles/glassmorphism.css */
+
+/* アプリケーション全体の背景 */
+body {
+  background: linear-gradient(to right top, #0b0f19, #1c1d2a, #2a2c3c, #393c4f, #484d62);
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: 'Roboto Mono', monospace;
+  color: #fff; /* デフォルトの文字色を白に */
+}
+
+/* グラスモーフィズム効果を適用するカードの基本スタイル */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 20px;
+}
+
+/* テキストの影で見やすくする */
+h1, h2, h3, h4, h5, h6, p, span, div {
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* ボタンのスタイル */
+.glass-button {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    font-family: 'Orbitron', sans-serif; /* 既存のフォントスタイルを適用 */
+}
+
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Primary action button style */
+.glass-button-primary {
+    background: rgba(76, 175, 80, 0.4); /* Greenish glass background */
+    border-color: rgba(76, 175, 80, 0.6);
+    font-size: 1.2rem;
+    padding: 12px 28px;
+    transform: scale(1.02);
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.glass-button-primary:hover {
+    background: rgba(76, 175, 80, 0.6); /* Brighter green on hover */
+    transform: scale(1.05);
+}

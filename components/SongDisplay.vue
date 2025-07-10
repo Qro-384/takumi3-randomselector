@@ -1,8 +1,8 @@
 <template>
-  <div class="song-display">
+  <div class="song-display glass-card">
     <h2>選ばれた曲</h2>
-    <p><strong>タイトル:</strong> {{ song.title }}[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</p>
-    <p><strong>レベル:</strong> {{ song.level.toFixed(1) }}</p>
+    <p>{{ song.title }}[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</p>
+    <p><strong>Lv.</strong>{{ song.level.toFixed(1) }}</p>
   </div>
 </template>
 
@@ -37,14 +37,38 @@ export default {
 </script>
 
 <style scoped>
-.difficulty-hard { color: orange; }
-.difficulty-master { color: purple; }
-.difficulty-insanity { color: gray; }
-.difficulty-ravage { color: red; }
-.song-display { margin-top: 30px; padding: 20px; border: 1px dashed #42b983; border-radius: 5px; background-color: #e6ffee; }
-.song-display p { margin: 8px 0; font-size: 1.1rem; }
-.song-display strong { color: #2c3e50; }
+.song-display {
+    margin: 40px auto 0 auto; /* Increased top margin and centered */
+    padding: 25px;
+    text-align: center;
+    background: rgba(76, 175, 80, 0.25); /* Greenish glass background */
+    border: 1px solid rgba(76, 175, 80, 0.4); /* Matching green border */
+    transform: scale(1.05); /* Make it pop a bit */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* Slightly stronger shadow */
+    max-width: 90%;
+}
+
+.song-display h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.song-display p {
+    margin: 12px 0;
+    font-size: 1.25rem;
+}
+.song-display strong {
+    color: #fff;
+    font-weight: bold;
+}
+.difficulty-hard { color: #ffd54f; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
+.difficulty-master { color: #ce93d8; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
+.difficulty-insanity { color: #e0e0e0; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
+.difficulty-ravage { color: #ff5252; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
 .difficulty-default {
-  color: grey;
+  color: #eee;
 }
 </style>
