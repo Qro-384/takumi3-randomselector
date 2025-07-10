@@ -5,9 +5,9 @@
         <ul>
             <li v-for="song in reversedSongHistory" :key="song.id || `${song.title}-${song.difficulty}`" class="song-item">
               <div class="song-details">
-                <span class="song-title" :title="song.title">{{ song.title }}</span>
-                <span class="song-difficulty">[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</span>
-                <span class="song-level">レベル: {{ song.level.toFixed(1) }}</span>
+                <span class="song-title" :title="song.title" :class="difficultyClass(song)">{{ song.title }}</span>
+                <span class="song-difficulty-text">[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</span>
+                <span class="song-level">Lv. {{ song.level.toFixed(1) }}</span>
               </div>
               <button @click="$emit('update:modelValue', modelValue.filter(s => s.id !== song.id))">削除</button>
             </li>
@@ -64,6 +64,8 @@ export default {
 .difficulty-insanity { color: gray; }
 .difficulty-ravage { color: red; }
 
+
+
 .song-memory {
   margin-top: 30px;
   padding: 20px;
@@ -109,7 +111,7 @@ export default {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .song-item:hover {
@@ -130,7 +132,7 @@ export default {
   margin-right: 10px;
 }
 
-.song-difficulty {
+.song-difficulty-text {
   flex-shrink: 0; /* 縮まないようにする */
   margin-right: 10px;
   white-space: nowrap;
@@ -175,5 +177,18 @@ export default {
 
 .controls button:hover {
   background-color: #616161;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .song-difficulty-text {
+    display: none;
+  }
+
+  /* On small screens, apply color to the title */
+  .song-title.difficulty-hard { color: orange; }
+  .song-title.difficulty-master { color: purple; }
+  .song-title.difficulty-insanity { color: gray; }
+  .song-title.difficulty-ravage { color: red; }
 }
 </style>
