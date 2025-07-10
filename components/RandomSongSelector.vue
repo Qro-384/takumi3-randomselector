@@ -21,7 +21,7 @@
       />
       
       <div class="button-container">
-        <button @click="selectRandomSong" class="glass-button glass-button-primary">ランダム選曲！</button>
+        <button @click="selectRandomSong" class="glass-button glass-button-primary">Random Select</button>
       </div>
     </div>
 

@@ -2,7 +2,7 @@
   <div class="song-display glass-card">
     <h2>選ばれた曲</h2>
     <p>{{ song.title }}[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</p>
-    <p><strong>Lv.</strong>{{ song.level.toFixed(1) }}</p>
+    <p><strong>Lv.</strong> {{ song.level.toFixed(1) }}</p>
   </div>
 </template>
 
