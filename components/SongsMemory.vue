@@ -47,6 +47,7 @@ export default {
             }
             const difficulty = song.difficulty.toLowerCase();
             switch (difficulty) {
+                case 'normal': return 'difficulty-normal';
                 case 'hard': return 'difficulty-hard';
                 case 'master': return 'difficulty-master';
                 case 'insanity': return 'difficulty-insanity';
@@ -128,6 +129,7 @@ export default {
 }
 
 /* Difficulty Colors */
+.difficulty-normal { color: #90caf9; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 .difficulty-hard { color: #ffd54f; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 .difficulty-master { color: #ce93d8; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 .difficulty-insanity { color: #e0e0e0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }

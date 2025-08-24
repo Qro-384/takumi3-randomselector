@@ -24,7 +24,7 @@ export default {
   emits: ['update:selectedDifficulty'],
   data() {
     return {
-      difficulties: ['Hard', 'Master', 'Insanity', 'Ravage'],
+      difficulties: ['Normal','Hard', 'Master', 'Insanity', 'Ravage'],
     };
   },
   methods: {
@@ -76,12 +76,14 @@ export default {
 }
 
 /* 難易度ごとの色設定 (非選択時はテキストとボーダーの色) */
+.btn-normal { color: dodgerblue; border-color: dodgerblue; }
 .btn-hard { color: orange; border-color: orange; }
 .btn-master { color: purple; border-color: purple; }
 .btn-insanity { color: gray; border-color: gray; }
 .btn-ravage { color: red; border-color: red; }
 
 /* 選択時のスタイル反転 */
+.btn-normal.is-selected { background-color: dodgerblue; color: white; }
 .btn-hard.is-selected { background-color: orange; color: white; }
 .btn-master.is-selected { background-color: purple; color: white; }
 .btn-insanity.is-selected { background-color: gray; color: white; }
