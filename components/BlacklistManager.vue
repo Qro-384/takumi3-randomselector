@@ -8,7 +8,7 @@
 
     <ul v-if="filteredSearchResults.length > 0" class="search-results">
       <li v-for="song in filteredSearchResults" :key="song.id" @click="addSongToBlacklist(song)" :class="{ 'is-blacklisted': isSongBlacklisted(song) }">
-        {{ song.title }} [{{ song.difficulty || '?' }}] (Level: {{ song.level.toFixed(1) }})
+        {{ song.title }} [{{ song.difficulty || '?' }}] (Level: {{ song.level >= 13 ? song.level.toFixed(1) : song.level.toFixed(0) }})
         <span v-if="isSongBlacklisted(song)" class="blacklisted-indicator">（追加済み）</span>
       </li>
     </ul>
@@ -51,6 +51,16 @@ export default {
   data() {
     return {
       searchKeyword: '',
+      searchDictionary: {
+        'Я':'R',
+        '!':'I',
+        'Σ':'E',
+        '(?,':'G',
+        '≠':'overlimit',
+        'α':'a',
+        'η':'eta',
+        '³':'3'
+      }
     };
   },
   computed: {
@@ -58,9 +68,13 @@ export default {
       if (!this.searchKeyword) {
         return [];
       }
-      const keyword = this.searchKeyword.toLowerCase();
+      const keyword = this.normalizeForSearch(this.searchKeyword);
+      if (!keyword) {
+        return [];
+      }
+
       let filtered = this.allSongs.filter(song =>
-        (song.title && song.title.toLowerCase().includes(keyword)) ||
+        (song.title && this.normalizeForSearch(song.title).includes(keyword)) ||
         (song.difficulty && song.difficulty.toLowerCase().includes(keyword)) ||
         (song.level && String(song.level).includes(keyword))
       );
@@ -77,6 +91,14 @@ export default {
     }
   },
   methods: {
+    normalizeForSearch(str) {
+      if (typeof str !== 'string') return '';
+      let result = str;
+      for (const [char, replacement] of Object.entries(this.searchDictionary)) {
+        result = result.replaceAll(char, replacement);
+      }
+      return result.toLowerCase().replace(/\s/g, '');
+    },
     addSongToBlacklist(songToAdd) {
       if (this.isSongBlacklisted(songToAdd)) {
         return;
