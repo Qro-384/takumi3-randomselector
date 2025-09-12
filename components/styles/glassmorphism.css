@@ -11,7 +11,7 @@ body {
 
 /* グラスモーフィズム効果を適用するカードの基本スタイル */
 .glass-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(42, 44, 60, 0.5);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
