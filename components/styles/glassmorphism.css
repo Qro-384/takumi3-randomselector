@@ -20,6 +20,12 @@ body {
   padding: 20px;
 }
 
+/* backdrop-filterをサポートしないブラウザ向けのフォールバック */
+@supports not (backdrop-filter: blur(5px)) {
+  .glass-card {
+    background: rgba(42, 44, 60, 0.7); /* 少し濃いめの半透明背景 */
+  }
+}
 /* テキストの影で見やすくする */
 h1, h2, h3, h4, h5, h6, p, span, div {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
