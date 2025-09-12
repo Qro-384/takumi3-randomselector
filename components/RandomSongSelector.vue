@@ -168,4 +168,24 @@ export default {
   font-weight: bold;
 }
 /* Keep other specific styles if necessary, but remove general layout styles */
+
+#random-song-selector {
+  max-width: 1200px; /* デスクトップでの最大幅を制限 */
+  margin: 60px auto 0 auto; /* 上マージンと左右中央寄せ */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box; /* paddingを含めてwidthを100%にする */
+}
+
+/* スマートフォン向けのスタイル */
+@media (max-width: 768px) {
+  #random-song-selector {
+    margin-top: 20px;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
 </style>
