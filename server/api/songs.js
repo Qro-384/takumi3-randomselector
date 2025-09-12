@@ -19,12 +19,13 @@ export default defineEventHandler(async (event) => {
     const records = [];
     return new Promise((resolve, reject) => {
       Readable.from(csvContent)
-        .pipe(csv({ headers: ['title', 'level', 'difficulty'], skipHeaders: false }))
+        .pipe(csv({ headers: ['title', 'level', 'difficulty','is_paying'], skipHeaders: false }))
         .on('data', (data) => {
           const song = {
             ...data,
             level: parseFloat(data.level),
-            id: `${data.title}-${data.difficulty}`
+            id: `${data.title}-${data.difficulty}`,
+            is_paying: data.is_paying === '1' // '1'ならtrue, '0'ならfalse
           };
           records.push(song);
         })

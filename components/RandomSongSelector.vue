@@ -8,6 +8,10 @@
         v-model:minLevel="minLevel"
         v-model:maxLevel="maxLevel"
       />
+      <div class="input-group">
+        <label>オプション:</label>
+        <PaymentOptionToggle v-model="OnlyNonPayingSongs">無課金曲のみ（現状Lv14以上のみ）</PaymentOptionToggle>
+      </div>
       <h2>難易度</h2>
       <SelectDifficulty
         v-model:selectedDifficulty="selectedDifficulty"
@@ -40,6 +44,7 @@ import SongDisplay from './SongDisplay.vue';
 import ErrorMessage from './ErrorMessage.vue';
 import SongsMemory from './SongsMemory.vue';
 import SelectDifficulty from './SelectDifficulty.vue';
+import PaymentOptionToggle from './PaymentOptionToggle.vue';
 
 export default {
   name: 'RandomSongSelector',
@@ -50,6 +55,7 @@ export default {
     ErrorMessage,
     SongsMemory,
     SelectDifficulty,
+    PaymentOptionToggle,
   },
   data() {
     return {
@@ -61,6 +67,7 @@ export default {
         currentSong: null,
         errorMessage: '',
         songsMemory: [], // 選曲履歴を保持するための配列
+        OnlyNonPayingSongs: false
     };
   },
   methods: {
@@ -84,6 +91,10 @@ export default {
 
       if (this.maxLevel !== null && !isNaN(this.maxLevel)) {
           availableSongs = availableSongs.filter(song => song.level <= this.maxLevel);
+      }
+
+      if (this.OnlyNonPayingSongs) {
+          availableSongs = availableSongs.filter(song => !song.is_paying);
       }
 
       // ブラックリスト処理: title と difficulty の両方が一致する場合に除外
@@ -146,5 +157,15 @@ export default {
   margin-top: 20px;
 }
 
+/* Add styles for the new option group */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 /* Keep other specific styles if necessary, but remove general layout styles */
 </style>
