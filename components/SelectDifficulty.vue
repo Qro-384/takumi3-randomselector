@@ -57,6 +57,11 @@ export default {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
+  /*
+    ボタンを中央揃えにし、画面幅が狭い場合に折り返すように設定
+    これにより、スマホ表示でのレイアウト崩れを防ぎます
+  */
+  flex-wrap: wrap;
   justify-content: center; /* Flexアイテム（ボタン）を中央揃えにする */
 }
 
