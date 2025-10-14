@@ -10,7 +10,7 @@
       />
       <div class="input-group">
         <label>オプション:</label>
-        <PaymentOptionToggle v-model="OnlyNonPayingSongs">無課金曲のみ（現状Lv14以上のみ）</PaymentOptionToggle>
+        <PaymentOptionToggle v-model="OnlyNonPayingSongs">無課金曲のみ</PaymentOptionToggle>
       </div>
       <h2>難易度</h2>
       <SelectDifficulty
