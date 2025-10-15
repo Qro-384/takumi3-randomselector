@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { normalizeForSearch } from '../utils/searchUtils';
 export default {
   name: 'BlacklistManager',
   props: {
@@ -51,19 +52,6 @@ export default {
   data() {
     return {
       searchKeyword: '',
-      searchDictionary: {
-        'Я':'R',
-        '!':'I',
-        'Σ':'E',
-        '(?,':'G',
-        '≠':'overlimit',
-        'α':'a',
-        'η':'eta',
-        '³':'3',
-        'Λ':'A',
-        'Θ':'O',
-        '飈':'つむじかぜ'
-      }
     };
   },
   computed: {
@@ -71,13 +59,13 @@ export default {
       if (!this.searchKeyword) {
         return [];
       }
-      const keyword = this.normalizeForSearch(this.searchKeyword);
+      const keyword = normalizeForSearch(this.searchKeyword);
       if (!keyword) {
         return [];
       }
 
       let filtered = this.allSongs.filter(song =>
-        (song.title && this.normalizeForSearch(song.title).includes(keyword)) ||
+        (song.title && normalizeForSearch(song.title).includes(keyword)) ||
         (song.difficulty && song.difficulty.toLowerCase().includes(keyword)) ||
         (song.level && String(song.level).includes(keyword))
       );
@@ -94,14 +82,6 @@ export default {
     }
   },
   methods: {
-    normalizeForSearch(str) {
-      if (typeof str !== 'string') return '';
-      let result = str;
-      for (const [char, replacement] of Object.entries(this.searchDictionary)) {
-        result = result.replaceAll(char, replacement);
-      }
-      return result.toLowerCase().replace(/\s/g, '');
-    },
     addSongToBlacklist(songToAdd) {
       if (this.isSongBlacklisted(songToAdd)) {
         return;
