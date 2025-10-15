@@ -62,7 +62,7 @@ export default {
         minLevel: null,
         maxLevel: null,
         selectedDifficulty: ['Master', 'Insanity', 'Ravage'],
-        blacklistedSongs: [], // Stores { id, title, difficulty } objects
+        blacklistedSongs: [], // Stores { id, title, difficulty, is_paying } objects
         allSongs: [],
         currentSong: null,
         errorMessage: '',

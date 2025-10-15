@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { normalizeForSearch } from '../utils/searchUtils';
+import { normalizeForSearch } from './utills/searchUtils';
 export default {
   name: 'BlacklistManager',
   props: {
