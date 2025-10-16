@@ -4,7 +4,7 @@
       v-for="difficulty in difficulties"
       :key="difficulty"
       class="button"
-      :class="[`btn-${difficulty.toLowerCase()}`, { 'is-selected': isSelected(difficulty) }]"
+      :class="[`btn-${difficulty.toLowerCase().replace(' ', '')}`, { 'is-selected': isSelected(difficulty) }]"
       @click="toggleDifficulty(difficulty)"
     >
       {{ difficulty }}
@@ -24,7 +24,7 @@ export default {
   emits: ['update:selectedDifficulty'],
   data() {
     return {
-      difficulties: ['Normal','Hard', 'Master', 'Insanity', 'Ravage'],
+      difficulties: ['Normal','Hard', 'Master', 'Insanity', 'Ravage', 'Chart Lab'],
     };
   },
   methods: {
@@ -86,6 +86,7 @@ export default {
 .btn-master { color: purple; border-color: purple; }
 .btn-insanity { color: gray; border-color: gray; }
 .btn-ravage { color: red; border-color: red; }
+.btn-chartlab { color: green; border-color: green; }
 
 /* 選択時のスタイル反転 */
 .btn-normal.is-selected { background-color: dodgerblue; color: white; }
@@ -93,6 +94,7 @@ export default {
 .btn-master.is-selected { background-color: purple; color: white; }
 .btn-insanity.is-selected { background-color: gray; color: white; }
 .btn-ravage.is-selected { background-color: red; color: white; }
+.btn-chartlab.is-selected { background-color: green; color: white; }
 
 .button.is-selected {
   transform: scale(1.05);

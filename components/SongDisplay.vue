@@ -2,12 +2,13 @@
   <div class="song-display glass-card">
     <h2>選ばれた曲</h2>
     <p>{{ song.title }}[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</p>
-    <p><strong>Lv.</strong> {{ song.level.toFixed(1) }}</p>
+    <p><strong>Lv.</strong> {{formatLevel(song.level)}}</p>
   </div>
 </template>
 
 <script>
 // import { getDifficultyClass } from './utils/styleUtils';
+import { formatLevel } from './utils/showUtils';
 export default {
   name: 'SongDisplay',
   props: {
@@ -15,9 +16,10 @@ export default {
       type: Object,
       required: true
     }
-  },
+  },  
 
   methods: {
+    formatLevel,
     difficultyClass(song) {
       if (!song || !song.difficulty) {
         return '';
@@ -29,6 +31,7 @@ export default {
         case 'master': return 'difficulty-master';
         case 'insanity': return 'difficulty-insanity';
         case 'ravage': return 'difficulty-ravage';
+        case 'chart lab': return 'difficulty-chartlab';
         default: return '';
         }
     }
@@ -70,6 +73,7 @@ export default {
 .difficulty-master { color: #ce93d8; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
 .difficulty-insanity { color: #e0e0e0; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
 .difficulty-ravage { color: #ff5252; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
+.difficulty-chartlab { color: #34c039; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); font-weight: bold; }
 .difficulty-default {
   color: #eee;
 }

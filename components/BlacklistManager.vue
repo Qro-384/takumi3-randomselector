@@ -8,7 +8,7 @@
 
     <ul v-if="filteredSearchResults.length > 0" class="search-results">
       <li v-for="song in filteredSearchResults" :key="song.id" @click="addSongToBlacklist(song)" :class="{ 'is-blacklisted': isSongBlacklisted(song) }">
-        {{ song.title }} [{{ song.difficulty || '?' }}] (Level: {{ song.level >= 13 ? song.level.toFixed(1) : song.level.toFixed(0) }})
+        {{ song.title }} [{{ song.difficulty || '?' }}] (Level: {{ formatLevel(song.level) }})
         <span v-if="isSongBlacklisted(song)" class="blacklisted-indicator">（追加済み）</span>
       </li>
     </ul>
@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { normalizeForSearch } from './utills/searchUtils';
+import { normalizeForSearch } from './utils/searchUtils';
+import { formatLevel } from './utils/showUtils';
 export default {
   name: 'BlacklistManager',
   props: {
@@ -71,17 +72,18 @@ export default {
       );
 
       if (this.minLevel !== null && this.maxLevel !== null) {
-        filtered = filtered.filter(song => song.level >= this.minLevel && song.level <= this.maxLevel);
+        filtered = filtered.filter(song => typeof song.level === 'string' || (song.level >= this.minLevel && song.level <= this.maxLevel));
       } else if (this.minLevel !== null) {
-        filtered = filtered.filter(song => song.level >= this.minLevel);
+        filtered = filtered.filter(song => typeof song.level === 'string' || song.level >= this.minLevel);
       } else if (this.maxLevel !== null) {
-        filtered = filtered.filter(song => song.level <= this.maxLevel);
+        filtered = filtered.filter(song => typeof song.level === 'string' || song.level <= this.maxLevel);
       }
 
       return filtered;
     }
   },
   methods: {
+    formatLevel,
     addSongToBlacklist(songToAdd) {
       if (this.isSongBlacklisted(songToAdd)) {
         return;

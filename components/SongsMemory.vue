@@ -7,7 +7,7 @@
               <div class="song-details">
                 <span class="song-title" :title="song.title" :class="difficultyClass(song)">{{ song.title }}</span>
                 <span class="song-difficulty-text">[<span :class="difficultyClass(song)">{{ song.difficulty }}</span>]</span>
-                <span class="song-level">Lv. {{ song.level.toFixed(1) }}</span>
+                <span class="song-level">Lv. {{ formatLevel(song.level) }}</span>
               </div>
               <button @click="$emit('update:modelValue', modelValue.filter(s => s.id !== song.id))" class="glass-button danger">削除</button>
             </li>
@@ -22,6 +22,7 @@
 
 <script>
 // import { getDifficultyClass } from './utils/styleUtils';
+import { formatLevel } from './utils/showUtils';
 export default {
     name: 'SongMemory',
     props: {
@@ -38,6 +39,7 @@ export default {
         }
     },
     methods: {
+        formatLevel,
         clearMemory() {
             this.$emit('update:modelValue', []);
         },
@@ -52,9 +54,11 @@ export default {
                 case 'master': return 'difficulty-master';
                 case 'insanity': return 'difficulty-insanity';
                 case 'ravage': return 'difficulty-ravage';
+                case 'chart lab': return 'difficulty-chartlab';
                 default: return '';
             }
-        }
+        },
+        
     },
 };
 </script>
@@ -134,6 +138,7 @@ export default {
 .difficulty-master { color: #ce93d8; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 .difficulty-insanity { color: #e0e0e0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 .difficulty-ravage { color: #ff5252; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+.difficulty-chartlab { color: #34c039; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -141,9 +146,11 @@ export default {
     display: none;
   }
   /* On small screens, apply color to the title */
+  .song-title.difficulty-normal { color: #90caf9; }
   .song-title.difficulty-hard { color: #ffd54f; }
   .song-title.difficulty-master { color: #ce93d8; }
   .song-title.difficulty-insanity { color: #e0e0e0; }
   .song-title.difficulty-ravage { color: #ff5252; }
+  .song-title.difficulty-chartlab { color: #34c039; }
 }
 </style>

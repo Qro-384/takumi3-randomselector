@@ -64,6 +64,8 @@ export default {
         selectedDifficulty: ['Master', 'Insanity', 'Ravage'],
         blacklistedSongs: [], // Stores { id, title, difficulty, is_paying } objects
         allSongs: [],
+        StandardSongs: [],
+        clSongs: [],
         currentSong: null,
         errorMessage: '',
         songsMemory: [], // 選曲履歴を保持するための配列
@@ -75,7 +77,7 @@ export default {
       this.currentSong = null; // 前回の選曲結果をクリア
       this.errorMessage = ''; // エラーメッセージをクリア
 
-      let availableSongs = this.allSongs;
+      let availableSongs = this.StandardSongs;
 
       // 難易度でフィルタリング
       const selectedDifficultiesSet = new Set(
@@ -91,6 +93,10 @@ export default {
 
       if (this.maxLevel !== null && !isNaN(this.maxLevel)) {
           availableSongs = availableSongs.filter(song => song.level <= this.maxLevel);
+      }
+
+      if (this.selectedDifficulty.includes('Chart Lab')) {
+          availableSongs = availableSongs.concat(this.clSongs);
       }
 
       if (this.OnlyNonPayingSongs) {
@@ -136,7 +142,10 @@ export default {
     try {
       // Nuxtが提供する$fetchを使用してAPIからデータを取得
       const songs = await $fetch('/api/songs');
-      this.allSongs = songs;
+      const clSongs = await $fetch('/api/songs_cl');
+      this.StandardSongs = songs;
+      this.clSongs = clSongs;
+      this.allSongs = [...this.StandardSongs, ...this.clSongs];
       console.log('全曲の読み込みが完了しました。');
     } catch (error) {
       this.errorMessage = '曲データの読み込みに失敗しました。';
