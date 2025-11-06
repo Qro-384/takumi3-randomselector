@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const records = [];
     return new Promise((resolve, reject) => {
       Readable.from(csvContent)
-        .pipe(csv({ headers: ['title', 'level', 'difficulty','is_paying'], skipHeaders: false }))
+        .pipe(csv({ headers: ['title', 'level', 'difficulty','is_paying','pack'], skipHeaders: false }))
         .on('data', (data) => {
           const song = {
             ...data,
